@@ -1,0 +1,6 @@
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\bin\Debug\Comu.dll
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\bin\Debug\Comu.pdb
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.csproj.AssemblyReference.cache
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.csproj.CoreCompileInputs.cache
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.dll
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.pdb
