@@ -9,7 +9,7 @@ namespace ControlAlumnes.Comu
         public IPAddress IpMask { get; set; }
         public string AdapterName { get; set; }
 
-        public delegate void MissatgeEventCallback(EstacioInfo estacioInfo, string missatge);
+        public delegate void MissatgeEventCallback(TipusMissatge tipusMissatge, IPAddress ipAddress, string json);
 
         private UdpSocket _udpSocket;
 

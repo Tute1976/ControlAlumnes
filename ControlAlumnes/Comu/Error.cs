@@ -14,8 +14,8 @@ namespace ControlAlumnes.Comu
                         ex.Message;
                 MessageBox.Show(msg, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
-                Traces.TipusTraça.Error.Traça(ex.Message);
-                Traces.TipusTraça.Error.Traça(ex.StackTrace.Replace(Environment.NewLine, "^").Split('^'));
+                TipusTraça.Error.Traça(ex.Message);
+                TipusTraça.Error.Traça(ex.StackTrace.Replace(Environment.NewLine, "^").Split('^'));
             }
             catch
             {

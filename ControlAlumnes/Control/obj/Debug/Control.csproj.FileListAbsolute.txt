@@ -11,3 +11,5 @@ D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\obj\Debug\Contro
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\obj\Debug\Control.csproj.Up2Date
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\obj\Debug\Control.exe
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\obj\Debug\Control.pdb
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\bin\Debug\Newtonsoft.Json.dll
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Control\bin\Debug\Newtonsoft.Json.xml

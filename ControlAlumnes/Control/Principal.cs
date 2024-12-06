@@ -18,7 +18,7 @@ namespace ControlAlumnes.Control
             InitializeComponent();
         }
 
-        private void FrmPrincipal_Load(object sender, System.EventArgs e)
+        private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             try
             {
@@ -71,13 +71,13 @@ namespace ControlAlumnes.Control
                 if (b)
                 {
                     botoIniciarAturar.Tag = false;
-                    botoIniciarAturar.Image = global::ControlAlumnes.Control.Properties.Resources.Media_Play;
+                    botoIniciarAturar.Image = Properties.Resources.Media_Play;
                     cbCodi.Enabled = true;
                 }
                 else
                 {
                     botoIniciarAturar.Tag = true;
-                    botoIniciarAturar.Image = global::ControlAlumnes.Control.Properties.Resources.Media_Stop;
+                    botoIniciarAturar.Image = Properties.Resources.Media_Stop;
                     cbCodi.Enabled = false;
 
                     llista.Items.Clear();
@@ -92,24 +92,71 @@ namespace ControlAlumnes.Control
             }
         }
 
-        private void Missatge(EstacioInfo estacioInfo, string missatge)
+        private void Missatge(TipusMissatge tipusMissatge, IPAddress ipAddress, string json)
         {
             try
             {
-                if (!Estacions.ContainsKey(estacioInfo.IpAddress))
+
+                switch (tipusMissatge)
                 {
-                    var item = llista.Items.Add(estacioInfo.Estacio, estacioInfo.Estacio, 1);
-                    item.SubItems.Add(estacioInfo.Usuari);
-                    item.SubItems.Add(estacioInfo.IpAddress.ToString());
-                    item.SubItems.Add(DateTime.Now.ToString("G"));
-                    item.Tag = estacioInfo;
-                    Estacions.Add(estacioInfo.IpAddress, estacioInfo);
+                    case TipusMissatge.Batec:
+                        var estacioInfo = json.Desserialitzar<EstacioInfo>();
+                        estacioInfo.IpAddress = ipAddress;
+                        if (!Estacions.ContainsKey(ipAddress))
+                        {
+                            var item = new ListViewItem(estacioInfo.Estacio)
+                            {
+                                ImageIndex = 1,
+                                StateImageIndex = 1
+                            };
+                            item.SubItems.Add(estacioInfo.Usuari);
+                            item.SubItems.Add(ipAddress.ToString());
+                            item.SubItems.Add(DateTime.Now.ToString("G"));
+                            item.Tag = estacioInfo;
+                            Estacions.Add(ipAddress, estacioInfo);
+                            if (llista.InvokeRequired)
+                                llista.Invoke((Action)(() => llista.Items.Add(item)));
+                            else
+                                llista.Items.Add(item);
+
+                            events.CrearEntrada(estacioInfo.Estacio, 1, "Nova estació registrada");
+                        }
+                        else
+                        {
+                            if (llista.InvokeRequired)
+                                llista.Invoke((Action)(() => llista.CanviaData(ipAddress)));
+                            else
+                                llista.CanviaData(ipAddress);
+                        }
+                        break;
+
+                    case TipusMissatge.Inici:
+                        if (llista.InvokeRequired)
+                            llista.Invoke((Action)(() => llista.CanviaImatge(ipAddress, 2)));
+                        else
+                            llista.CanviaImatge(ipAddress, 1);
+                        break;
+
+                    case TipusMissatge.Fi:
+                        if (llista.InvokeRequired)
+                            llista.Invoke((Action)(() => llista.CanviaImatge(ipAddress, 3)));
+                        else
+                            llista.CanviaImatge(ipAddress, 2);
+                        break;
+
+                    case TipusMissatge.Deteccio:
+                        if (llista.InvokeRequired)
+                            llista.Invoke((Action)(() => llista.CanviaImatge(ipAddress, 3)));
+                        else
+                            llista.CanviaImatge(ipAddress, 3);
+                        break;
+
+                    case TipusMissatge.Benvinguda:
+                        break;
+                    case TipusMissatge.Resposta:
+                        break;
                 }
-                else
-                {
-                    var item = llista.Items[estacioInfo.Estacio];
-                    item.SubItems[3].Text = DateTime.Now.ToString("G");
-                }
+
             }
             catch (Exception ex)
             {

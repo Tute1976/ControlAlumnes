@@ -5,13 +5,6 @@ namespace ControlAlumnes.Comu
 {
     public static class Traces
     {
-        public enum TipusTraça
-        {
-            Info,
-            Error,
-            Debug
-        }
-
         public static void Traça(this TipusTraça tipus, string missatge)
         {
             try

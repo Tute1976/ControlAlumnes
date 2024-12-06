@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using System.Net.Sockets;
 using System.Net;
 using System.Text;
@@ -39,9 +40,9 @@ namespace ControlAlumnes.Comu
             Receive();
         }
 
-        public void Send(string text)
+        public void Send(TipusMissatge tipusMissatge, string json)
         {
-            var data = Encoding.ASCII.GetBytes(text);
+            var data = Encoding.UTF8.GetBytes($"{tipusMissatge}|{json}");
             _socket.BeginSend(data, 0, data.Length, SocketFlags.None, (ar) =>
             {
                 _socket.EndSend(ar);
@@ -57,17 +58,13 @@ namespace ControlAlumnes.Comu
                 _socket.BeginReceiveFrom(so.Buffer, 0, BufSize, SocketFlags.None, ref _epFrom, _recv, so);
 
                 var ipEndPoint = (IPEndPoint)_epFrom;
-                var missatge = Encoding.ASCII.GetString(so.Buffer, 0, bytes);
+                var missatge = Encoding.UTF8.GetString(so.Buffer, 0, bytes);
+
                 var mm = missatge.Split('|');
 
-                var estacioInfo = new EstacioInfo
-                {
-                    IpAddress = ipEndPoint.Address,
-                    Estacio = mm[0],
-                    Usuari = mm[1]
-                };
+                if (Enum.TryParse(mm.First(), true, out TipusMissatge tipusMissatge))
+                    _missatgeEvent?.Invoke(tipusMissatge, ipEndPoint.Address, mm.Last());
 
-                _missatgeEvent?.Invoke(estacioInfo, mm[2]);
 
             }, _state);
         }
