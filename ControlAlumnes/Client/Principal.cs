@@ -16,7 +16,7 @@ namespace ControlAlumnes.Client
             try
             {
                 var udpSocket = new UdpSocket();
-                udpSocket.Client("192.168.3.228", 20000);
+                udpSocket.Client("192.168.1.15", 20000);
 
                 var estacioInfo = new EstacioInfo
                 {

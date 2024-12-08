@@ -11,7 +11,6 @@ namespace ControlAlumnes.Control
     {
         private IEnumerable<IpInfo> IpInfos { get; set; }
         private IpInfo IpInfo { get;set;}
-        private Dictionary<IPAddress, EstacioInfo> Estacions {get; set; }
 
         public FrmPrincipal()
         {
@@ -30,6 +29,12 @@ namespace ControlAlumnes.Control
 
                 foreach (var ipInfo in IpInfos)
                     cbCodi.Items.Add($@"{ipInfo.AdapterName} | {ipInfo.IpAddress}");
+
+                if (cbCodi.Items.Count != 1) 
+                    return;
+                
+                cbCodi.SelectedIndex = 0;
+                cbCodi.Visible = false;
             }
             catch (Exception ex)
             {
@@ -81,7 +86,8 @@ namespace ControlAlumnes.Control
                     cbCodi.Enabled = false;
 
                     llista.Items.Clear();
-                    Estacions = new Dictionary<IPAddress, EstacioInfo>();
+                    llista.Groups.Add("Connectades", "Estacions connectades");
+                    llista.Groups.Add("Desconnectades", "Estacions desconnectades");
                     IpInfo.Escolta(true, Missatge);
                 }
 
@@ -102,9 +108,10 @@ namespace ControlAlumnes.Control
                     case TipusMissatge.Batec:
                         var estacioInfo = json.Desserialitzar<EstacioInfo>();
                         estacioInfo.IpAddress = ipAddress;
-                        if (!Estacions.ContainsKey(ipAddress))
+                        var item = llista.Busca(ipAddress);
+                        if (item == null)
                         {
-                            var item = new ListViewItem(estacioInfo.Estacio)
+                            item = new ListViewItem(estacioInfo.Estacio)
                             {
                                 ImageIndex = 1,
                                 StateImageIndex = 1
@@ -113,20 +120,15 @@ namespace ControlAlumnes.Control
                             item.SubItems.Add(ipAddress.ToString());
                             item.SubItems.Add(DateTime.Now.ToString("G"));
                             item.Tag = estacioInfo;
-                            Estacions.Add(ipAddress, estacioInfo);
-                            if (llista.InvokeRequired)
-                                llista.Invoke((Action)(() => llista.Items.Add(item)));
-                            else
-                                llista.Items.Add(item);
-
+                            llista.Afegeix(item, "Connectades");
                             events.CrearEntrada(estacioInfo.Estacio, 1, "Nova estació registrada");
+
+                            tabEstacions.EnumeraTab(llista.Items.Count);
+                            tabEvents.EnumeraTab(events.Items.Count);
                         }
                         else
                         {
-                            if (llista.InvokeRequired)
-                                llista.Invoke((Action)(() => llista.CanviaData(ipAddress)));
-                            else
-                                llista.CanviaData(ipAddress);
+                            item.Actualitza();
                         }
                         break;
 

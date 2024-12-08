@@ -35,7 +35,7 @@
             this.cNom = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cAdreca = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.cTemps = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imatges = new System.Windows.Forms.ImageList(this.components);
+            this.imatges_32x32 = new System.Windows.Forms.ImageList(this.components);
             this.barraEstat = new System.Windows.Forms.StatusStrip();
             this.barraBotons = new System.Windows.Forms.ToolStrip();
             this.botoTancar = new System.Windows.Forms.ToolStripButton();
@@ -43,17 +43,18 @@
             this.botoIniciarAturar = new System.Windows.Forms.ToolStripButton();
             this.lCodi = new System.Windows.Forms.ToolStripLabel();
             this.cbCodi = new System.Windows.Forms.ToolStripComboBox();
-            this.split = new System.Windows.Forms.SplitContainer();
             this.events = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+            this.imageList_16x16 = new System.Windows.Forms.ImageList(this.components);
+            this.tabs = new System.Windows.Forms.TabControl();
+            this.tabEstacions = new System.Windows.Forms.TabPage();
+            this.tabEvents = new System.Windows.Forms.TabPage();
             this.barraBotons.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.split)).BeginInit();
-            this.split.Panel1.SuspendLayout();
-            this.split.Panel2.SuspendLayout();
-            this.split.SuspendLayout();
+            this.tabs.SuspendLayout();
+            this.tabEstacions.SuspendLayout();
+            this.tabEvents.SuspendLayout();
             this.SuspendLayout();
             // 
             // llista
@@ -64,13 +65,14 @@
             this.cAdreca,
             this.cTemps});
             this.llista.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.llista.FullRowSelect = true;
             this.llista.HideSelection = false;
-            this.llista.LargeImageList = this.imatges;
-            this.llista.Location = new System.Drawing.Point(0, 0);
+            this.llista.LargeImageList = this.imatges_32x32;
+            this.llista.Location = new System.Drawing.Point(3, 3);
             this.llista.Margin = new System.Windows.Forms.Padding(6);
             this.llista.Name = "llista";
-            this.llista.Size = new System.Drawing.Size(600, 477);
-            this.llista.SmallImageList = this.imatges;
+            this.llista.Size = new System.Drawing.Size(890, 434);
+            this.llista.SmallImageList = this.imatges_32x32;
             this.llista.TabIndex = 0;
             this.llista.UseCompatibleStateImageBehavior = false;
             this.llista.View = System.Windows.Forms.View.Details;
@@ -95,14 +97,14 @@
             this.cTemps.Text = "Temps";
             this.cTemps.Width = 150;
             // 
-            // imatges
+            // imatges_32x32
             // 
-            this.imatges.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imatges.ImageStream")));
-            this.imatges.TransparentColor = System.Drawing.Color.Transparent;
-            this.imatges.Images.SetKeyName(0, "Estacio_Blau.png");
-            this.imatges.Images.SetKeyName(1, "Estacio_Verd.png");
-            this.imatges.Images.SetKeyName(2, "Estacio_Buida.png");
-            this.imatges.Images.SetKeyName(3, "Estacio_Vermell.png");
+            this.imatges_32x32.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imatges_32x32.ImageStream")));
+            this.imatges_32x32.TransparentColor = System.Drawing.Color.Transparent;
+            this.imatges_32x32.Images.SetKeyName(0, "Estacio_Blau.png");
+            this.imatges_32x32.Images.SetKeyName(1, "Estacio_Verd.png");
+            this.imatges_32x32.Images.SetKeyName(2, "Estacio_Buida.png");
+            this.imatges_32x32.Images.SetKeyName(3, "Estacio_Vermell.png");
             // 
             // barraEstat
             // 
@@ -174,30 +176,12 @@
             // 
             this.cbCodi.Alignment = System.Windows.Forms.ToolStripItemAlignment.Right;
             this.cbCodi.DropDownWidth = 300;
+            this.cbCodi.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.cbCodi.Name = "cbCodi";
             this.cbCodi.Size = new System.Drawing.Size(300, 41);
             this.cbCodi.Sorted = true;
             this.cbCodi.ToolTipText = "Codi de connexió";
             this.cbCodi.TextChanged += new System.EventHandler(this.CbCodi_TextChanged);
-            // 
-            // split
-            // 
-            this.split.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.split.Location = new System.Drawing.Point(0, 41);
-            this.split.Name = "split";
-            // 
-            // split.Panel1
-            // 
-            this.split.Panel1.Controls.Add(this.llista);
-            this.split.Panel1MinSize = 600;
-            // 
-            // split.Panel2
-            // 
-            this.split.Panel2.Controls.Add(this.events);
-            this.split.Panel2MinSize = 300;
-            this.split.Size = new System.Drawing.Size(904, 477);
-            this.split.SplitterDistance = 600;
-            this.split.TabIndex = 3;
             // 
             // events
             // 
@@ -206,12 +190,13 @@
             this.columnHeader2,
             this.columnHeader3});
             this.events.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.events.FullRowSelect = true;
             this.events.HideSelection = false;
-            this.events.LargeImageList = this.imatges;
-            this.events.Location = new System.Drawing.Point(0, 0);
+            this.events.LargeImageList = this.imageList_16x16;
+            this.events.Location = new System.Drawing.Point(3, 3);
             this.events.Name = "events";
-            this.events.Size = new System.Drawing.Size(300, 477);
-            this.events.SmallImageList = this.imatges;
+            this.events.Size = new System.Drawing.Size(890, 434);
+            this.events.SmallImageList = this.imageList_16x16;
             this.events.TabIndex = 0;
             this.events.UseCompatibleStateImageBehavior = false;
             this.events.View = System.Windows.Forms.View.Details;
@@ -231,21 +216,56 @@
             this.columnHeader3.Text = "";
             this.columnHeader3.Width = 200;
             // 
-            // imageList1
+            // imageList_16x16
             // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "Estacio_Blau.png");
-            this.imageList1.Images.SetKeyName(1, "Estacio_Verd.png");
-            this.imageList1.Images.SetKeyName(2, "Estacio_Buida.png");
-            this.imageList1.Images.SetKeyName(3, "Estacio_Vermell.png");
+            this.imageList_16x16.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList_16x16.ImageStream")));
+            this.imageList_16x16.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList_16x16.Images.SetKeyName(0, "Estacio_Blau.png");
+            this.imageList_16x16.Images.SetKeyName(1, "Estacio_Verd.png");
+            this.imageList_16x16.Images.SetKeyName(2, "Estacio_Buida.png");
+            this.imageList_16x16.Images.SetKeyName(3, "Estacio_Vermell.png");
+            // 
+            // tabs
+            // 
+            this.tabs.Controls.Add(this.tabEstacions);
+            this.tabs.Controls.Add(this.tabEvents);
+            this.tabs.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tabs.Location = new System.Drawing.Point(0, 41);
+            this.tabs.Name = "tabs";
+            this.tabs.SelectedIndex = 0;
+            this.tabs.Size = new System.Drawing.Size(904, 477);
+            this.tabs.TabIndex = 1;
+            // 
+            // tabEstacions
+            // 
+            this.tabEstacions.Controls.Add(this.llista);
+            this.tabEstacions.Location = new System.Drawing.Point(4, 33);
+            this.tabEstacions.Name = "tabEstacions";
+            this.tabEstacions.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEstacions.Size = new System.Drawing.Size(896, 440);
+            this.tabEstacions.TabIndex = 0;
+            this.tabEstacions.Tag = "Estacions ({0})";
+            this.tabEstacions.Text = "Estacions";
+            this.tabEstacions.UseVisualStyleBackColor = true;
+            // 
+            // tabEvents
+            // 
+            this.tabEvents.Controls.Add(this.events);
+            this.tabEvents.Location = new System.Drawing.Point(4, 33);
+            this.tabEvents.Name = "tabEvents";
+            this.tabEvents.Padding = new System.Windows.Forms.Padding(3);
+            this.tabEvents.Size = new System.Drawing.Size(896, 440);
+            this.tabEvents.TabIndex = 1;
+            this.tabEvents.Tag = "Events ({0})";
+            this.tabEvents.Text = "Events";
+            this.tabEvents.UseVisualStyleBackColor = true;
             // 
             // FrmPrincipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(904, 540);
-            this.Controls.Add(this.split);
+            this.Controls.Add(this.tabs);
             this.Controls.Add(this.barraBotons);
             this.Controls.Add(this.barraEstat);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -255,10 +275,9 @@
             this.Load += new System.EventHandler(this.FrmPrincipal_Load);
             this.barraBotons.ResumeLayout(false);
             this.barraBotons.PerformLayout();
-            this.split.Panel1.ResumeLayout(false);
-            this.split.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.split)).EndInit();
-            this.split.ResumeLayout(false);
+            this.tabs.ResumeLayout(false);
+            this.tabEstacions.ResumeLayout(false);
+            this.tabEvents.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,7 +289,7 @@
         private System.Windows.Forms.ColumnHeader cEstacio;
         private System.Windows.Forms.ColumnHeader cAdreca;
         private System.Windows.Forms.ColumnHeader cTemps;
-        private System.Windows.Forms.ImageList imatges;
+        private System.Windows.Forms.ImageList imatges_32x32;
         private System.Windows.Forms.StatusStrip barraEstat;
         private System.Windows.Forms.ToolStrip barraBotons;
         private System.Windows.Forms.ToolStripButton botoTancar;
@@ -279,12 +298,14 @@
         private System.Windows.Forms.ColumnHeader cNom;
         private System.Windows.Forms.ToolStripComboBox cbCodi;
         private System.Windows.Forms.ToolStripLabel lCodi;
-        private System.Windows.Forms.SplitContainer split;
         private System.Windows.Forms.ListView events;
         private System.Windows.Forms.ColumnHeader columnHeader1;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
-        private System.Windows.Forms.ImageList imageList1;
+        private System.Windows.Forms.ImageList imageList_16x16;
+        private System.Windows.Forms.TabControl tabs;
+        private System.Windows.Forms.TabPage tabEstacions;
+        private System.Windows.Forms.TabPage tabEvents;
     }
 }
 
