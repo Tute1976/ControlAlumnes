@@ -103,5 +103,33 @@ namespace ControlAlumnes.Comu
             var json = ipAddressServidor.ToString().Serialitza();
             tipusMissatge.Enviar(ipAddress, port, json);
         }
+
+        public static IPAddress CalculaXarxa(this IPAddress ipAddress, IPAddress ipMask)
+        {
+            var bytesAddress = ipAddress.GetAddressBytes();
+            var bytesMask = ipMask.GetAddressBytes();
+
+            var bytesResult = IPAddress.None.GetAddressBytes();
+            for (var i = 0; i < 4; i++)
+            {
+                var notMask = Convert.ToByte(bytesMask[i] & 255);
+                bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
+            }
+            return new IPAddress(bytesResult);
+        }
+
+        public static IPAddress CalculaNode(this IPAddress ipAddress, IPAddress ipMask)
+        {
+            var bytesAddress = ipAddress.GetAddressBytes();
+            var bytesMask = ipMask.GetAddressBytes();
+
+            var bytesResult = IPAddress.None.GetAddressBytes();
+            for (var i = 0; i < 4; i++)
+            {
+                var notMask = Convert.ToByte(~bytesMask[i] & 255);
+                bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
+            }
+            return new IPAddress(bytesResult);
+        }
     }
 }

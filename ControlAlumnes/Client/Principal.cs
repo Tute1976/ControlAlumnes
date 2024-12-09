@@ -48,7 +48,9 @@ namespace ControlAlumnes.Client
                 foreach (var ipInfo in Sessio.IpInfos)
                 {
                     var ipAddress = ipInfo.GetIpSegonsCodi(txtCodi.Text);
-
+                    var network = ipAddress.CalculaXarxa(IPAddress.Parse(ipInfo.IpMask));
+                    if (!network.ToString().Equals(ipInfo.IpNetworkAddress)) 
+                        continue;
 
                     listInfo.CrearEntradaInfo($"Ping enviat ({ipAddress})");
                     TipusMissatge.Ping.Enviar(ipAddress, Ip.PortServidor, ipInfo);

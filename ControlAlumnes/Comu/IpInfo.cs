@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Net;
-using System.Net.NetworkInformation;
 
 namespace ControlAlumnes.Comu
 {
@@ -18,37 +17,16 @@ namespace ControlAlumnes.Comu
 
         private UdpSocket _udpSocket;
 
-        public IpInfo()
-        {
-
-        }
-
         public IpInfo(IPAddress ipAddress, IPAddress ipMask)
         {
             try
             {
                 IpAddress = ipAddress.ToString();
                 IpMask = ipMask.ToString();
+                IpNetworkAddress = ipAddress.CalculaXarxa(ipMask).ToString();
 
-                var bytesAddress = ipAddress.GetAddressBytes();
-                var bytesMask = ipMask.GetAddressBytes();
-
-                var bytesResult = IPAddress.None.GetAddressBytes();
-                for (var i = 0; i < 4; i++)
-                {
-                    var notMask = Convert.ToByte(bytesMask[i] & 255);
-                    bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
-                }
-                IpNetworkAddress = new IPAddress(bytesResult).ToString();
-
-                bytesResult = IPAddress.None.GetAddressBytes();
-                for (var i = 0; i < 4; i++)
-                {
-                    var notMask = Convert.ToByte(~bytesMask[i] & 255);
-                    bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
-                }
-                var address = new IPAddress(bytesResult);
-                Codi = Convert.ToInt32(address.ToString().Replace(".", ""));
+                var ipNode = ipAddress.CalculaNode(ipMask);
+                Codi = Convert.ToInt32(ipNode.ToString().Replace(".", ""));
             }
             catch (Exception ex)
             {

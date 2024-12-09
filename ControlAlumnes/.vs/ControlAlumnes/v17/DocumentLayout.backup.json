@@ -3,24 +3,8 @@
   "WorkspaceRootPath": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\comu\\udpsocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|solutionrelative:comu\\udpsocket.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\comu\\ip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|solutionrelative:comu\\ip.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{D320C266-39DB-4E4B-9AF3-2C791B5ED07B}|Client\\Client.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\client\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D320C266-39DB-4E4B-9AF3-2C791B5ED07B}|Client\\Client.csproj|solutionrelative:client\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\comu\\formulari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{0D2B92FE-F31F-43DC-A841-033483DCC103}|Comu\\Comu.csproj|solutionrelative:comu\\formulari.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{E77D9EB6-E80D-4A07-9BCD-45A7D491216B}|Control\\Control.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\control\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{E77D9EB6-E80D-4A07-9BCD-45A7D491216B}|Control\\Control.csproj|solutionrelative:control\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{D320C266-39DB-4E4B-9AF3-2C791B5ED07B}|Client\\Client.csproj|d:\\privat\\programacio\\git\\controlalumnes\\controlalumnes\\client\\principal.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -55,79 +39,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "UDPSocket.cs",
-              "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\UDPSocket.cs",
-              "RelativeDocumentMoniker": "Comu\\UDPSocket.cs",
-              "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\UDPSocket.cs",
-              "RelativeToolTip": "Comu\\UDPSocket.cs",
-              "ViewState": "AgIAACsAAAAAAAAAAAAswFgAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T13:47:39.857Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "IP.cs",
-              "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\IP.cs",
-              "RelativeDocumentMoniker": "Comu\\IP.cs",
-              "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\IP.cs",
-              "RelativeToolTip": "Comu\\IP.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAA+AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T14:05:32.839Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "Formulari.cs",
-              "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\Formulari.cs",
-              "RelativeDocumentMoniker": "Comu\\Formulari.cs",
-              "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Comu\\Formulari.cs",
-              "RelativeToolTip": "Comu\\Formulari.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEAAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T13:58:49.542Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "Principal.cs",
               "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Client\\Principal.cs",
               "RelativeDocumentMoniker": "Client\\Principal.cs",
               "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Client\\Principal.cs",
               "RelativeToolTip": "Client\\Principal.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAkwIoAAAAmAAAAAAAAAA==",
+              "ViewState": "AgIAAAoAAAAAAAAAAAAawCQAAABBAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T13:46:36.79Z",
+              "WhenOpened": "2024-12-09T15:55:48.892Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "Principal.cs [Design]",
               "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Client\\Principal.cs",
               "RelativeDocumentMoniker": "Client\\Principal.cs",
               "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Client\\Principal.cs [Design]",
               "RelativeToolTip": "Client\\Principal.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T13:46:33.946Z",
+              "WhenOpened": "2024-12-09T15:55:47.833Z",
               "EditorCaption": " [Design]"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Principal.cs",
-              "DocumentMoniker": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Control\\Principal.cs",
-              "RelativeDocumentMoniker": "Control\\Principal.cs",
-              "ToolTip": "D:\\Privat\\Programacio\\Git\\ControlAlumnes\\ControlAlumnes\\Control\\Principal.cs",
-              "RelativeToolTip": "Control\\Principal.cs",
-              "ViewState": "AgIAAFUAAAAAAAAAAAAuwGQAAAAQAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-09T13:46:28.763Z",
-              "EditorCaption": ""
             }
           ]
         }

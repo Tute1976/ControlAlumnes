@@ -1,6 +1,4 @@
-﻿using System.Net;
-
-namespace ControlAlumnes.Comu
+﻿namespace ControlAlumnes.Comu
 {
     public class EstacioInfo
     {
