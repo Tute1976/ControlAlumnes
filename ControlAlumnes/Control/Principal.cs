@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Windows.Forms;
@@ -9,9 +8,6 @@ namespace ControlAlumnes.Control
 {
     public partial class FrmPrincipal : Form
     {
-        private IEnumerable<IpInfo> IpInfos { get; set; }
-        private IpInfo IpInfo { get;set;}
-
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -21,13 +17,13 @@ namespace ControlAlumnes.Control
         {
             try
             {
-                IpInfos = Ip.GetCodisConnexio();
+                if(!Ip.GetIpInfo(out var ipInfos))
+                    return;
+                Sessio.IpInfos = ipInfos;
+
                 cbCodi.Items.Clear();
 
-                if (IpInfos == null) 
-                    return;
-
-                foreach (var ipInfo in IpInfos)
+                foreach (var ipInfo in Sessio.IpInfos)
                     cbCodi.Items.Add($@"{ipInfo.AdapterName} | {ipInfo.IpAddress}");
 
                 if (cbCodi.Items.Count != 1) 
@@ -52,9 +48,9 @@ namespace ControlAlumnes.Control
             else
             {
                 var adapterName = cbCodi.Text.Split('|').First().Trim();
-                IpInfo = IpInfos.First(i => i.AdapterName.Equals(adapterName, StringComparison.CurrentCultureIgnoreCase));
+                Sessio.IpInfo = Sessio.IpInfos.First(i => i.AdapterName.Equals(adapterName, StringComparison.CurrentCultureIgnoreCase));
 
-                lCodi.Text = $@"{IpInfo.Codi}";
+                lCodi.Text = $@"{Sessio.IpInfo.Codi}";
                 botoIniciarAturar.Enabled = true;
             }
         }
@@ -88,7 +84,7 @@ namespace ControlAlumnes.Control
                     llista.Items.Clear();
                     llista.Groups.Add("Connectades", "Estacions connectades");
                     llista.Groups.Add("Desconnectades", "Estacions desconnectades");
-                    IpInfo.Escolta(true, Missatge);
+                    Sessio.IpInfo.Escolta(true, Missatge);
                 }
 
             }
@@ -107,7 +103,6 @@ namespace ControlAlumnes.Control
                 {
                     case TipusMissatge.Batec:
                         var estacioInfo = json.Desserialitzar<EstacioInfo>();
-                        estacioInfo.IpAddress = ipAddress;
                         var item = llista.Busca(ipAddress);
                         if (item == null)
                         {
@@ -156,6 +151,10 @@ namespace ControlAlumnes.Control
                     case TipusMissatge.Benvinguda:
                         break;
                     case TipusMissatge.Resposta:
+                        break;
+
+                    case TipusMissatge.Ping: // Paquet de ping rebut, contestant ...
+                        TipusMissatge.Pong.Enviar(ipAddress, Ip.PortClient, ipAddress);
                         break;
                 }
 

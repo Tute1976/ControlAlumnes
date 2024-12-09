@@ -71,7 +71,7 @@
             this.llista.Location = new System.Drawing.Point(3, 3);
             this.llista.Margin = new System.Windows.Forms.Padding(6);
             this.llista.Name = "llista";
-            this.llista.Size = new System.Drawing.Size(890, 434);
+            this.llista.Size = new System.Drawing.Size(890, 443);
             this.llista.SmallImageList = this.imatges_32x32;
             this.llista.TabIndex = 0;
             this.llista.UseCompatibleStateImageBehavior = false;
@@ -141,7 +141,7 @@
             this.botoTancar.Image = global::ControlAlumnes.Control.Properties.Resources.Logout;
             this.botoTancar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.botoTancar.Name = "botoTancar";
-            this.botoTancar.Size = new System.Drawing.Size(36, 36);
+            this.botoTancar.Size = new System.Drawing.Size(36, 38);
             this.botoTancar.Text = "Tancar";
             this.botoTancar.Click += new System.EventHandler(this.BotoTancar_Click);
             // 
@@ -157,7 +157,7 @@
             this.botoIniciarAturar.Image = global::ControlAlumnes.Control.Properties.Resources.Media_Play;
             this.botoIniciarAturar.ImageTransparentColor = System.Drawing.Color.Magenta;
             this.botoIniciarAturar.Name = "botoIniciarAturar";
-            this.botoIniciarAturar.Size = new System.Drawing.Size(36, 36);
+            this.botoIniciarAturar.Size = new System.Drawing.Size(36, 38);
             this.botoIniciarAturar.Tag = false;
             this.botoIniciarAturar.Text = "Iniciar";
             this.botoIniciarAturar.Click += new System.EventHandler(this.BotoIniciarAturar_Click);
@@ -195,7 +195,7 @@
             this.events.LargeImageList = this.imageList_16x16;
             this.events.Location = new System.Drawing.Point(3, 3);
             this.events.Name = "events";
-            this.events.Size = new System.Drawing.Size(890, 434);
+            this.events.Size = new System.Drawing.Size(890, 443);
             this.events.SmallImageList = this.imageList_16x16;
             this.events.TabIndex = 0;
             this.events.UseCompatibleStateImageBehavior = false;
@@ -239,10 +239,10 @@
             // tabEstacions
             // 
             this.tabEstacions.Controls.Add(this.llista);
-            this.tabEstacions.Location = new System.Drawing.Point(4, 33);
+            this.tabEstacions.Location = new System.Drawing.Point(4, 24);
             this.tabEstacions.Name = "tabEstacions";
             this.tabEstacions.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEstacions.Size = new System.Drawing.Size(896, 440);
+            this.tabEstacions.Size = new System.Drawing.Size(896, 449);
             this.tabEstacions.TabIndex = 0;
             this.tabEstacions.Tag = "Estacions ({0})";
             this.tabEstacions.Text = "Estacions";
@@ -251,10 +251,10 @@
             // tabEvents
             // 
             this.tabEvents.Controls.Add(this.events);
-            this.tabEvents.Location = new System.Drawing.Point(4, 33);
+            this.tabEvents.Location = new System.Drawing.Point(4, 24);
             this.tabEvents.Name = "tabEvents";
             this.tabEvents.Padding = new System.Windows.Forms.Padding(3);
-            this.tabEvents.Size = new System.Drawing.Size(896, 440);
+            this.tabEvents.Size = new System.Drawing.Size(896, 449);
             this.tabEvents.TabIndex = 1;
             this.tabEvents.Tag = "Events ({0})";
             this.tabEvents.Text = "Events";
@@ -262,13 +262,14 @@
             // 
             // FrmPrincipal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 24F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(904, 540);
             this.Controls.Add(this.tabs);
             this.Controls.Add(this.barraBotons);
             this.Controls.Add(this.barraEstat);
             this.Font = new System.Drawing.Font("Calibri", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmPrincipal";
             this.Text = "Control de connexions";

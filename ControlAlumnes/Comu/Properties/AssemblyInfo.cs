@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("Comu")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Control d'alumnes")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Datalab Tecnologia, S.A.")]
+[assembly: AssemblyCompany("Tuté")]
 [assembly: AssemblyProduct("Comu")]
-[assembly: AssemblyCopyright("Copyright © Datalab Tecnologia, S.A. 2024")]
+[assembly: AssemblyCopyright("Copyright © Tuté 2024")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

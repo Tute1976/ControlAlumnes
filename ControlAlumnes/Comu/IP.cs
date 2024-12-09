@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Net.NetworkInformation;
 
 namespace ControlAlumnes.Comu
 {
     public static class Ip
     {
+        public static int PortServidor => Properties.Settings.Default.Port_Servidor;
+        public static int PortClient => Properties.Settings.Default.Port_Client;
+
         public static bool GetIpInfo(out List<IpInfo> ipInfos)
         {
             ipInfos = new List<IpInfo>();
@@ -30,18 +34,17 @@ namespace ControlAlumnes.Comu
                     if (networkInterface.Description.Contains("VMware"))
                         continue;
                     if (networkInterface.NetworkInterfaceType != NetworkInterfaceType.Wireless80211 &&
-                        networkInterface.NetworkInterfaceType != NetworkInterfaceType.Ethernet) 
+                        networkInterface.NetworkInterfaceType != NetworkInterfaceType.Ethernet)
                         continue;
 
                     foreach (var ip in networkInterface.GetIPProperties().UnicastAddresses)
                     {
-                        if (ip.Address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork) 
+                        if (ip.Address.AddressFamily != System.Net.Sockets.AddressFamily.InterNetwork)
                             continue;
-                            
-                        var ipInfo = new IpInfo
+
+                        var ipInfo = new IpInfo(ip.Address, ip.IPv4Mask)
                         {
-                            IpAddress = ip.Address,
-                            IpMask = ip.IPv4Mask,
+                            PhysicalAddress = networkInterface.GetPhysicalAddress(),
                             AdapterName = networkInterface.Name
                         };
                         ipInfos.Add(ipInfo);
@@ -58,21 +61,50 @@ namespace ControlAlumnes.Comu
             return false;
         }
 
-
-        public static List<IpInfo> GetCodisConnexio()
+        public static IPAddress GetIpSegonsCodi(this IpInfo ipInfo, string codi)
         {
-            try
-            {
-                return !GetIpInfo(out var ipInfos) ? 
-                    null : 
-                    ipInfos;
-            }
-            catch (Exception ex)
-            {
-                ex.Show();
-            }
+            var codiPle = codi.PadLeft(12, '0');
+            var ipCodiPle = $"{codiPle.Substring(0,3)}.{codiPle.Substring(3, 3)}.{codiPle.Substring(6, 3)}.{codiPle.Substring(9, 3)}";
+            var ipAddressCodi = IPAddress.Parse(ipCodiPle);
+            var bytesIpAddressCodi = ipAddressCodi.GetAddressBytes();
+            var bytesMask = ipInfo.IpMask.GetAddressBytes();
 
-            return null;
+            var bytesResult = IPAddress.None.GetAddressBytes();
+
+            for (var i = 0; i < 4; i++)
+                bytesResult[i] = Convert.ToByte(bytesIpAddressCodi[i] | bytesMask[i]);
+
+            var address = new IPAddress(bytesResult);
+            return address;
+        }
+
+        private static void Enviar(this TipusMissatge tipusMissatge, IPAddress ipAddress, int port, string json)
+        {
+            var udpSocket = new UdpSocket();
+            udpSocket.Client(ipAddress, port);
+            udpSocket.Send(tipusMissatge, json);
+        }
+
+        public static void Enviar(this TipusMissatge tipusMissatge, IPAddress ipAddress, int port, IpInfo ipInfo)
+        {
+            var json = "";
+            if (ipInfo != null)
+            {
+                var estacioInfo = new EstacioInfo
+                {
+                    Estacio = Environment.MachineName,
+                    Usuari = Environment.UserName,
+                    IpInfo = ipInfo
+                };
+                json = estacioInfo.Serialitza();
+            }
+            tipusMissatge.Enviar(ipAddress, port, json);
+        }
+
+        public static void Enviar(this TipusMissatge tipusMissatge, IPAddress ipAddress, int port, IPAddress ipAddressServidor)
+        {
+            var json = ipAddressServidor.Serialitza();
+            tipusMissatge.Enviar(ipAddress, port, json);
         }
     }
 }

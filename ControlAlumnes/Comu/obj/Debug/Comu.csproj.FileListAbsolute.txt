@@ -7,3 +7,4 @@ D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.pdb
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\bin\Debug\Newtonsoft.Json.dll
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\bin\Debug\Newtonsoft.Json.xml
 D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\obj\Debug\Comu.csproj.Up2Date
+D:\Privat\Programacio\Git\ControlAlumnes\ControlAlumnes\Comu\bin\Debug\Comu.dll.config

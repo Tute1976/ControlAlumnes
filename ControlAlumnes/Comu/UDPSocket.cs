@@ -49,11 +49,11 @@ namespace ControlAlumnes.Comu
             }
         }
 
-        public void Client(string address, int port)
+        public void Client(IPAddress address, int port)
         {
             try
             {
-                _socket.Connect(IPAddress.Parse(address), port);
+                _socket.Connect(address, port);
                 Receive();
             }
             catch (Exception ex)

@@ -14,7 +14,7 @@ namespace ControlAlumnes.Comu
                 {
                     case null:
                         continue;
-                    case EstacioInfo estacioInfo when estacioInfo.IpAddress.Equals(ipAddress):
+                    case EstacioInfo estacioInfo when estacioInfo.IpInfo.IpAddress.Equals(ipAddress):
                         return item;
                 }
             }

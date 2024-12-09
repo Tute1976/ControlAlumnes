@@ -13,7 +13,10 @@
         Resposta,
         Batec,
         Inici,
+        Inici_Resposta,
         Fi,
-        Deteccio
+        Deteccio,
+        Ping,
+        Pong
     }
 }
