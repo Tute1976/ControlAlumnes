@@ -33,7 +33,7 @@ namespace ControlAlumnes.Comu
 
         }
 
-        public void Server(IPAddress address, int port, IpInfo.MissatgeEventCallback missatgeEvent)
+        private void Server(IPAddress address, int port, IpInfo.MissatgeEventCallback missatgeEvent)
         {
             try
             {
@@ -95,9 +95,10 @@ namespace ControlAlumnes.Comu
                     var mm = missatge.Split('|');
 
                     if (Enum.TryParse(mm.First(), true, out TipusMissatge tipusMissatge))
+                    {
+                        TipusTraça.Info.Traça($"Missatge rebut de tipus '{tipusMissatge}' de {ipEndPoint.Address}");
                         _missatgeEvent?.Invoke(tipusMissatge, ipEndPoint.Address, mm.Last());
-
-
+                    }
                 }, _state);
             }
             catch (Exception ex)

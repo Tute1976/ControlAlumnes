@@ -62,6 +62,16 @@ namespace ControlAlumnes.Comu
                 events.Items.Insert(0, item);
         }
 
+        public static void CrearEntradaInfo(this ListBox llista, string text)
+        {
+            var t = $@"{DateTime.Now:G}: {text}";
+
+            if (llista.InvokeRequired)
+                llista.Invoke((Action)(() => llista.Items.Insert(0, t)));
+            else
+                llista.Items.Insert(0, t);
+        }
+
         public static void EnumeraTab(this TabPage tab, int numero)
         {
             if (tab.InvokeRequired)
@@ -73,9 +83,9 @@ namespace ControlAlumnes.Comu
         public static void Afegeix(this ListView llista, ListViewItem item, string grup)
         {
             if (llista.InvokeRequired)
-                llista.Invoke((Action)(() => llista.Groups[grup].Items.Add(item)));
+                llista.Invoke((Action)(() => llista.Items.Add(item).Group = llista.Groups[grup]));
             else
-                llista.Groups[grup].Items.Add(item);
+                llista.Items.Add(item).Group = llista.Groups[grup];
         }
 
         public static void Actualitza(this ListViewItem item)

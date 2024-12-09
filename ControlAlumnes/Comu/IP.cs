@@ -44,7 +44,7 @@ namespace ControlAlumnes.Comu
 
                         var ipInfo = new IpInfo(ip.Address, ip.IPv4Mask)
                         {
-                            PhysicalAddress = networkInterface.GetPhysicalAddress(),
+                            PhysicalAddress = networkInterface.GetPhysicalAddress().ToString(),
                             AdapterName = networkInterface.Name
                         };
                         ipInfos.Add(ipInfo);
@@ -67,12 +67,12 @@ namespace ControlAlumnes.Comu
             var ipCodiPle = $"{codiPle.Substring(0,3)}.{codiPle.Substring(3, 3)}.{codiPle.Substring(6, 3)}.{codiPle.Substring(9, 3)}";
             var ipAddressCodi = IPAddress.Parse(ipCodiPle);
             var bytesIpAddressCodi = ipAddressCodi.GetAddressBytes();
-            var bytesMask = ipInfo.IpMask.GetAddressBytes();
+            var bytesNetworkAddress = IPAddress.Parse(ipInfo.IpNetworkAddress).GetAddressBytes();
 
             var bytesResult = IPAddress.None.GetAddressBytes();
 
             for (var i = 0; i < 4; i++)
-                bytesResult[i] = Convert.ToByte(bytesIpAddressCodi[i] | bytesMask[i]);
+                bytesResult[i] = Convert.ToByte(bytesIpAddressCodi[i] | bytesNetworkAddress[i]);
 
             var address = new IPAddress(bytesResult);
             return address;
@@ -80,6 +80,8 @@ namespace ControlAlumnes.Comu
 
         private static void Enviar(this TipusMissatge tipusMissatge, IPAddress ipAddress, int port, string json)
         {
+            TipusTraça.Info.Traça($"Enviant missatge de tipus '{tipusMissatge}' a {ipAddress}:{port}");
+
             var udpSocket = new UdpSocket();
             udpSocket.Client(ipAddress, port);
             udpSocket.Send(tipusMissatge, json);
@@ -90,20 +92,15 @@ namespace ControlAlumnes.Comu
             var json = "";
             if (ipInfo != null)
             {
-                var estacioInfo = new EstacioInfo
-                {
-                    Estacio = Environment.MachineName,
-                    Usuari = Environment.UserName,
-                    IpInfo = ipInfo
-                };
-                json = estacioInfo.Serialitza();
+                Sessio.EstacioInfo.IpInfo = ipInfo;
+                json = Sessio.EstacioInfo.Serialitza();
             }
             tipusMissatge.Enviar(ipAddress, port, json);
         }
 
         public static void Enviar(this TipusMissatge tipusMissatge, IPAddress ipAddress, int port, IPAddress ipAddressServidor)
         {
-            var json = ipAddressServidor.Serialitza();
+            var json = ipAddressServidor.ToString().Serialitza();
             tipusMissatge.Enviar(ipAddress, port, json);
         }
     }

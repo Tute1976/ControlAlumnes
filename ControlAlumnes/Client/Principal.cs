@@ -17,6 +17,8 @@ namespace ControlAlumnes.Client
         {
             try
             {
+                listInfo.Items.Clear();
+
                 if (!Ip.GetIpInfo(out var ipInfos))
                     return;
                 Sessio.IpInfos = ipInfos;
@@ -36,20 +38,28 @@ namespace ControlAlumnes.Client
         {
             try
             {
+                Enabled = false;
+
+                Sessio.EstacioInfo.Nom = txtNom.Text;
+
                 if (!Ip.GetIpInfo(out var ipInfos))
                     return;
                 Sessio.IpInfos = ipInfos;
                 foreach (var ipInfo in Sessio.IpInfos)
                 {
                     var ipAddress = ipInfo.GetIpSegonsCodi(txtCodi.Text);
+
+
+                    listInfo.CrearEntradaInfo($"Ping enviat ({ipAddress})");
                     TipusMissatge.Ping.Enviar(ipAddress, Ip.PortServidor, ipInfo);
                 }
 
-                Sessio.IpInfo.Escolta(true, Missatge);
+                Sessio.EstacioInfo.IpInfo.Escolta(true, Missatge);
             }
             catch (Exception ex)
             {
                 ex.Show();
+                Enabled = true;
             }
         }
 
@@ -57,11 +67,13 @@ namespace ControlAlumnes.Client
         {
             try
             {
+                listInfo.CrearEntradaInfo($"Missatge rebut --> {tipusMissatge}");
+
                 switch (tipusMissatge)
                 {
                     case TipusMissatge.Pong: // Paquet de pong rebut, contestant amb batec ...
                         Sessio.IpAddressServidor = ipAddress;
-                        Sessio.IpInfo = Sessio.IpInfos.First(i => i.IpAddress.ToString().Equals(json));
+                        Sessio.EstacioInfo.IpInfo = Sessio.IpInfos.First(i => i.IpAddress.ToString().Equals(json));
                         TimerBatex_Tick(null, null);
 
                         timerBatex.Enabled = true;
@@ -69,9 +81,17 @@ namespace ControlAlumnes.Client
                         break;
 
                     case TipusMissatge.Inici:
+                        if (InvokeRequired)
+                            Invoke((Action)Amaga);
+                        else
+                            Amaga();
                         break;
 
                     case TipusMissatge.Fi:
+                        if (InvokeRequired)
+                            Invoke((Action)Mostra);
+                        else
+                            Mostra();
                         break;
 
                     default:
@@ -91,12 +111,21 @@ namespace ControlAlumnes.Client
 
             e.Cancel = true;
 
+            Amaga();
+        }
+
+        private void IconaBarra_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            Mostra();
+        }
+
+        private void Amaga()
+        {
             WindowState = FormWindowState.Minimized;
             ShowInTaskbar = false;
             Hide();
         }
-
-        private void IconaBarra_MouseDoubleClick(object sender, MouseEventArgs e)
+        private void Mostra()
         {
             ShowInTaskbar = true;
             Show();
@@ -106,7 +135,8 @@ namespace ControlAlumnes.Client
         {
             try
             {
-                TipusMissatge.Batec.Enviar(Sessio.IpAddressServidor, Ip.PortServidor, Sessio.IpInfo);
+                listInfo.CrearEntradaInfo($"Batex enviat ({Sessio.IpAddressServidor})");
+                TipusMissatge.Batec.Enviar(Sessio.IpAddressServidor, Ip.PortServidor, Sessio.EstacioInfo.IpInfo);
             }
             catch (Exception ex)
             {

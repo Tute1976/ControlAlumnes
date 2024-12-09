@@ -6,13 +6,14 @@ namespace ControlAlumnes.Comu
 {
     public class IpInfo
     {
-        public PhysicalAddress PhysicalAddress { get; set; }
-        public IPAddress IpAddress { get; set; }
-        public IPAddress IpNetworkAddress { get; set; }
-        public IPAddress IpMask { get; set; }
+        public string PhysicalAddress { get; set; }
+        public string IpAddress { get; set; }
+        public string IpNetworkAddress { get; set; }
+        public string IpMask { get; set; }
+        
         public string AdapterName { get; set; }
         public int Codi { get; set; }
-
+        
         public delegate void MissatgeEventCallback(TipusMissatge tipusMissatge, IPAddress ipAddress, string json);
 
         private UdpSocket _udpSocket;
@@ -26,24 +27,24 @@ namespace ControlAlumnes.Comu
         {
             try
             {
-                IpAddress = ipAddress;
-                IpMask = ipMask;
+                IpAddress = ipAddress.ToString();
+                IpMask = ipMask.ToString();
 
-                var bytesAddress = IpAddress.GetAddressBytes();
-                var bytesMask = IpMask.GetAddressBytes();
+                var bytesAddress = ipAddress.GetAddressBytes();
+                var bytesMask = ipMask.GetAddressBytes();
 
                 var bytesResult = IPAddress.None.GetAddressBytes();
                 for (var i = 0; i < 4; i++)
                 {
-                    var notMask = Convert.ToByte(~bytesMask[i] & 255);
+                    var notMask = Convert.ToByte(bytesMask[i] & 255);
                     bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
                 }
-                IpNetworkAddress = new IPAddress(bytesResult);
+                IpNetworkAddress = new IPAddress(bytesResult).ToString();
 
                 bytesResult = IPAddress.None.GetAddressBytes();
                 for (var i = 0; i < 4; i++)
                 {
-                    var notMask = Convert.ToByte(bytesMask[i] & 255);
+                    var notMask = Convert.ToByte(~bytesMask[i] & 255);
                     bytesResult[i] = Convert.ToByte(bytesAddress[i] & notMask);
                 }
                 var address = new IPAddress(bytesResult);

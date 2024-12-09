@@ -48,9 +48,9 @@ namespace ControlAlumnes.Control
             else
             {
                 var adapterName = cbCodi.Text.Split('|').First().Trim();
-                Sessio.IpInfo = Sessio.IpInfos.First(i => i.AdapterName.Equals(adapterName, StringComparison.CurrentCultureIgnoreCase));
+                Sessio.EstacioInfo.IpInfo = Sessio.IpInfos.First(i => i.AdapterName.Equals(adapterName, StringComparison.CurrentCultureIgnoreCase));
 
-                lCodi.Text = $@"{Sessio.IpInfo.Codi}";
+                lCodi.Text = $@"{Sessio.EstacioInfo.IpInfo.Codi}";
                 botoIniciarAturar.Enabled = true;
             }
         }
@@ -84,7 +84,7 @@ namespace ControlAlumnes.Control
                     llista.Items.Clear();
                     llista.Groups.Add("Connectades", "Estacions connectades");
                     llista.Groups.Add("Desconnectades", "Estacions desconnectades");
-                    Sessio.IpInfo.Escolta(true, Missatge);
+                    Sessio.EstacioInfo.IpInfo.Escolta(true, Missatge);
                 }
 
             }
@@ -98,7 +98,6 @@ namespace ControlAlumnes.Control
         {
             try
             {
-
                 switch (tipusMissatge)
                 {
                     case TipusMissatge.Batec:
